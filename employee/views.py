@@ -20,7 +20,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     permission_classes = [permissions.IsAuthenticated]
 
-    @action(detail=False, methods=['post'], url_path='bulk-save')
+    @action(detail=False, methods=['post'], url_path='bulk-save', permission_classes=[permissions.IsAdminUser])
     def bulk_save(self, request):
         serializer = EmployeeBulkSerializer(data=request.data)
         if serializer.is_valid():
